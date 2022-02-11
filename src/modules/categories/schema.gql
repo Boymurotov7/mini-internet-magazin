@@ -1,0 +1,40 @@
+
+
+extend type Query {
+	Categories(
+		categoryId:ID
+		search:String
+		pagination:Pagination={}
+		):[Category!]!
+}
+
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 3
+}
+
+extend type Mutation {
+	addCategory(
+		category_name: String!
+	): Response! 
+	editCategory(
+		categoryId:ID!
+		category_name: String!
+	): Response!
+	deleteCategory(
+		category_name: String!
+	): Response!
+}
+
+type Category{
+	categoryId: ID!
+	category_name: String!
+	products: [Product!]!
+}
+
+extend type Response {
+	status: Int!
+	message: String!
+	Category: Category
+}

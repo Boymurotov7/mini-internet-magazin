@@ -1,0 +1,33 @@
+
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 2
+}
+
+extend type Query {
+	orders(orderId: ID userId: ID): [Order!]!
+}
+
+
+extend type Mutation {
+	addOrder(userId: ID! product_id: ID! is_paid: String! ): Response!
+	changeOrder(orderId: ID! product_id: ID! is_paid: String! ): Response!
+	deleteOrder(orderId: ID!): Response!
+}
+
+type Order {
+	orderId: ID!
+	user:User!
+	product:Product!
+	is_paid: String!
+	categories: [Category!]!
+}
+
+ 
+extend type Response {
+	status: Int!
+	message: String!
+	Order: Order
+}
+

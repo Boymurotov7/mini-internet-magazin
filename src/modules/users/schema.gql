@@ -1,0 +1,45 @@
+scalar Email
+scalar contact
+scalar Role
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 2
+}
+
+type Query {
+	login(username: String password: String):[User!]!
+}
+
+type Mutation {
+	register(
+		username: String
+		password: String
+		contact: contact
+		email: Email
+		role: Role
+	): Response!
+	changeUser(
+		userId: ID!
+		username: String
+		password: String
+		contact:contact
+		email: Email
+	): Response! 
+}
+
+type User{
+	userId: ID!
+	username: String
+	password: String
+	contact: contact
+	email: Email
+	role: String
+	orders: [Order!]!
+}
+
+type Response {
+	status: Int!
+	message: String!
+	user: User
+}

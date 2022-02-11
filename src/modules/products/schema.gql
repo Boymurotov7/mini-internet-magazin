@@ -1,0 +1,44 @@
+
+
+input Pagination {
+	page: Int = 1
+	limit: Int = 2
+}
+
+extend type Query {
+	Products:[Product!]!
+}
+
+extend type Mutation {
+	addProduct(
+		category_name:String!
+	 	productName:String!
+	 	price:String!
+	 	shortDesc:String!
+	 	longDesc:String!
+	 	picture:String!
+	): Response! 
+	editProduct(
+		productId:ID!
+		productName: String!
+	): Response!
+	deleteProduct(
+		productName: String!
+	): Response!
+}
+
+type Product{
+	productId: ID!
+	category_name:String!
+ 	productName:String!
+ 	price:String!
+ 	shortDesc:String
+ 	longDesc:String
+	picture:String!
+}
+
+extend type Response {
+	status: Int!
+	message: String!
+	Product: Product
+}
